@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.app')
 
-@section('title', __('Scheduling Reports'))
+@section('title', __('Scheduling Report'))
 
 @section('content')
     <div class="alert alert-primary">

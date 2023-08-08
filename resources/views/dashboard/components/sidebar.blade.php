@@ -50,77 +50,25 @@
                     </a>
                 </li>
 
-                @php
-                    $arr = [
-                        [
-                            'name' => __('Master Data'),
-                            'set' => [
-                                [
-                                    'name' => 'officer',
-                                    'icon' => 'bi bi-person-badge',
-                                    'feature' => ['show', 'create'],
-                                ],
-                                [
-                                    'name' => 'area',
-                                    'icon' => 'bi bi-building',
-                                    'feature' => ['show', 'create'],
-                                ],
-                                [
-                                    'name' => 'timetable',
-                                    'icon' => 'bi bi-calendar2-event',
-                                    'feature' => ['show', 'create'],
-                                ],
-                            ],
-                        ],
-                        [
-                            'name' => __('Data Manage'),
-                            'set' => [
-                                [
-                                    'name' => 'schedule',
-                                    'icon' => 'bi bi-calendar-range-fill',
-                                    'feature' => ['show', 'create'],
-                                ],
-                                [
-                                    'name' => 'attendance',
-                                    'icon' => 'bi bi-calendar2-check',
-                                    'feature' => ['show', 'create'],
-                                ],
-                            ],
-                        ],
-                        [
-                            'name' => __('Print'),
-                            'set' => [
-                                [
-                                    'name' => 'scheduling-report',
-                                    'icon' => 'bi bi-printer',
-                                ],
-                                [
-                                    'name' => 'attendance-report',
-                                    'icon' => 'bi bi-printer',
-                                ],
-                            ],
-                        ],
-                    ];
-                @endphp
-                @foreach ($arr as $item)
+                @foreach (GeneralHelper::get_sidebar_menu() as $item)
                     <li class="sidebar-title">{{ $item['name'] }}</li>
                     @foreach ($item['set'] as $item_)
                         <li
-                            class="sidebar-item @if (isset($item_['feature'])) has-sub @endif @if (Request::routeIs($item_['name']) || Request::routeIs($item_['name'] . '.*')) active @endif">
-                            <a href="@if (!isset($item_['feature'])) {{ route($item_['name']) }} @else # @endif"
+                            class="sidebar-item @if (isset($item_['feature'])) has-sub @endif @if (Request::routeIs($item_['route']) || Request::routeIs($item_['route'] . '.*')) active @endif">
+                            <a href="@if (!isset($item_['feature'])) {{ route($item_['route']) }} @else # @endif"
                                 class='sidebar-link'>
                                 <i class="{{ $item_['icon'] }}"></i>
-                                <span>{{ __(Str::of($item_['name'])->headline()->plural()->value) }}</span>
+                                <span>{{ $item_['name'] }}</span>
                             </a>
                             @if (isset($item_['feature']))
-                                <ul class="submenu @if (Request::routeIs($item_['name']) || Request::routeIs($item_['name'] . '.*')) active @endif">
-                                    <li class="submenu-item @if (Request::routeIs($item_['name'] . '.create')) active @endif">
-                                        <a href="{{ route($item_['name'] . '.create') }}">{{ __('Create') }}</a>
+                                <ul class="submenu @if (Request::routeIs($item_['route']) || Request::routeIs($item_['route'] . '.*')) active @endif">
+                                    <li class="submenu-item @if (Request::routeIs($item_['route'] . '.create')) active @endif">
+                                        <a href="{{ route($item_['route'] . '.create') }}">{{ __('Create') }}</a>
                                     </li>
                                     <li class="submenu-item @if (
-                                        (Request::routeIs($item_['name']) || Request::routeIs($item_['name'] . '.*')) &&
-                                            !Request::routeIs($item_['name'] . '.create')) active @endif">
-                                        <a href="{{ route($item_['name']) }}">{{ __('See All') }}</a>
+                                        (Request::routeIs($item_['route']) || Request::routeIs($item_['route'] . '.*')) &&
+                                            !Request::routeIs($item_['route'] . '.create')) active @endif">
+                                        <a href="{{ route($item_['route']) }}">{{ __('See All') }}</a>
                                     </li>
                                 </ul>
                             @endif

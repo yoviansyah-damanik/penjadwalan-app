@@ -10,6 +10,7 @@ class Schedule extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+    protected $with = ['area', 'timetable'];
 
     protected static function boot()
     {
@@ -45,6 +46,6 @@ class Schedule extends Model
 
     public function attendance()
     {
-        return $this->hasOneThrough(Attendance::class, AttendanceRecord::class);
+        return $this->hasOneThrough(Attendance::class, AttendanceRecord::class, 'schedule_id', 'id', 'id', 'attendance_id');
     }
 }

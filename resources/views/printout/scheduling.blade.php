@@ -101,10 +101,10 @@
     <table class="bordered">
         <thead class="font-bold">
             <tr>
-                <th width=30px rowspan=2>No</th>
-                <th width=160px rowspan=2>Area Tugas</th>
-                <th colspan={{ $period->count() }}>Hari/Tanggal</th>
-                <th width=90px rowspan=2>Ket</th>
+                <th width=30px rowspan=2>{{ __('Numb') }}</th>
+                <th width=160px rowspan=2>{{ __('Task Area') }}</th>
+                <th colspan={{ $period->count() }}>{{ __('Date/Time') }}</th>
+                <th width=90px rowspan=2>{{ __('Expl') }}</th>
             </tr>
             <tr>
                 @foreach ($period as $date)
@@ -130,7 +130,7 @@
                         </td>
                     @endforeach
                     <td>
-                        {{-- EXPLANATION TEXT --}}
+                        {{-- INFORMATION --}}
                     </td>
                 </tr>
                 @if ($area['total_column'] > 1)
@@ -145,7 +145,7 @@
                                         </td>
                                     @endforeach
                                     <td>
-                                        {{-- EXPLANATION TEXT --}}
+                                        {{-- INFORMATION --}}
                                     </td>
                                 </tr>
                             @endforeach

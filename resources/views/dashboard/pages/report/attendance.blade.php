@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.app')
 
-@section('title', __('Attendance Reports'))
+@section('title', __('Attendance Report'))
 
 @section('content')
     <div class="alert alert-primary">

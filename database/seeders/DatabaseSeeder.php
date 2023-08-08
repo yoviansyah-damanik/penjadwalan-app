@@ -22,9 +22,12 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        $this->call(UserSeeder::class);
-        $this->call(AreaSeeder::class);
-        $this->call(OfficerSeeder::class);
-        $this->call(TimetableSeeder::class);
+        $this->call([
+            RoleAndPermissionSeeder::class,
+            UserSeeder::class,
+            AreaSeeder::class,
+            OfficerSeeder::class,
+            TimetableSeeder::class,
+        ]);
     }
 }

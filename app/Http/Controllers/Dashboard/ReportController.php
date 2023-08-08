@@ -39,7 +39,7 @@ class ReportController extends Controller
 
         $data = Area::get()
             ->map(function ($q) use ($start_date, $end_date, $timetables) {
-                return ([
+                return [
                     'name' => $q->name,
                     'timetable' => $timetables->map(function ($r) use ($q, $start_date, $end_date) {
                         return collect([
@@ -94,7 +94,7 @@ class ReportController extends Controller
                     })->filter(fn ($r) => $r['total_column'] > 0)
                         ->values()
                         ->sum('total_column')
-                ]);
+                ];
             });
 
         // DATA ORDER LIST

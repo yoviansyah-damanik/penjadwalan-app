@@ -22118,9 +22118,9 @@ body .bi:before {
     border-radius: .5rem;
     display: flex;
     float: right;
-    height: 3rem;
+    height: 100% !important;
     justify-content: center;
-    width: 3rem
+    width: 100% !important
 }
 
 .stats-icon i {
@@ -22348,6 +22348,27 @@ a {
     width: auto !important;
 }
 
+.dashboard-page .card-body {
+    padding: 1rem !important;
+}
+
+.dashboard-page .card-body h5 {
+    font-weight: 500;
+    color: #7c8db5;
+    font-size: 1.2em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.dashboard-page .card-body h6 {
+    font-weight: bolder;
+    margin-bottom: 0;
+    font-size: 1em;
+}
+
 table.table-condensed {
     margin: auto;
 }
@@ -22356,4 +22377,15 @@ table.table-condensed {
 .datepicker th {
     width: 45px;
     height: 35px;
+}
+
+@media screen and (max-width:425px) {
+    .dashboard-page .card-body h5 {
+        margin-top: .5rem;
+        text-align: center;
+    }
+
+    .dashboard-page .card-body h6 {
+        text-align: center;
+    }
 }
