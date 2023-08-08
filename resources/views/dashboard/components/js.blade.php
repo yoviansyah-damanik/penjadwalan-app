@@ -2,7 +2,7 @@
 <script src="{{ asset('dashboard-assets/js/bootstrap.js') }}"></script>
 <script src="{{ asset('dashboard-assets/js/app.js') }}"></script>
 <script src="{{ asset('dashboard-assets/extensions/sweetalert2/sweetalert2.all.js') }}"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
 <script>
     $.fn.datepicker.dates['id'] = {
         days: ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'],
