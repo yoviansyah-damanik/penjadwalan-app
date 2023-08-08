@@ -119,7 +119,7 @@
                     <td>{{ $item['date']->translatedFormat('l, d F Y') }}</td>
                     <td>
                         @if ($item['schedule'])
-                            {{ $item['schedule']?->attendance_record->attendanceStatusText ? __(Str::headline($item['schedule']?->attendance_record->attendanceStatusText)) : '-' }}
+                            {{ $item['schedule']?->attendance_record?->attendanceStatusText ? __(Str::headline($item['schedule']->attendance_record->attendanceStatusText)) : '-' }}
                         @else
                             {{ '-' }}
                         @endif
