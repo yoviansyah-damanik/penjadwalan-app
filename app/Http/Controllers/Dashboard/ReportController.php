@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Dashboard;
 use Carbon\Carbon;
 use App\Models\Area;
 use App\Models\Officer;
+use \PDF;
 use Carbon\CarbonPeriod;
 use App\Models\Timetable;
 use Illuminate\Http\Request;
-use Barryvdh\DomPDF\Facade\PDF;
 use App\Http\Controllers\Controller;
 
 class ReportController extends Controller

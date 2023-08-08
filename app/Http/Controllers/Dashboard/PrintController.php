@@ -7,7 +7,7 @@ use App\Models\Schedule;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use App\Helpers\GeneralHelper;
-use Barryvdh\DomPDF\Facade\PDF;
+use \PDF;
 use Illuminate\Support\Collection;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
