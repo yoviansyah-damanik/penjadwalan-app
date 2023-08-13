@@ -6,10 +6,10 @@ use Carbon\Carbon;
 use App\Models\Area;
 use App\Models\Officer;
 use \PDF;
-use Carbon\CarbonPeriod;
 use App\Models\Timetable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Carbon\CarbonPeriod;
 
 class ReportController extends Controller
 {
@@ -37,17 +37,21 @@ class ReportController extends Controller
         $period = CarbonPeriod::since($start_date)->until($end_date);
         $timetables = Timetable::get();
 
+        $date_period = [];
+        foreach ($period as $date) {
+            $date_period[] = $date->format('Y-m-d');
+        }
+
         $data = Area::get()
-            ->map(function ($q) use ($start_date, $end_date, $timetables) {
+            ->map(function ($q) use ($date_period, $timetables) {
                 return [
                     'name' => $q->name,
-                    'timetable' => $timetables->map(function ($r) use ($q, $start_date, $end_date) {
+                    'timetable' => $timetables->map(function ($r) use ($q, $date_period) {
                         return collect([
                             'title' => $r->title,
                             'color' => $r->color,
                             'schedules' => $q->schedules
-                                ->where('date', '>=', $start_date)
-                                ->where('date', '<=', $end_date)
+                                ->whereIn('date', $date_period)
                                 ->where('timetable_id', $r->id)
                                 ->map(function ($s, $key) use ($q) {
                                     return collect([
@@ -57,8 +61,7 @@ class ReportController extends Controller
                                 })
                                 ->groupBy('date'),
                             'total_column' => $q->schedules
-                                ->where('date', '>=', $start_date)
-                                ->where('date', '<=', $end_date)
+                                ->whereIn('date', $date_period)
                                 ->where('timetable_id', $r->id)
                                 ->groupBy('date')
                                 ->max(function ($s) {
@@ -67,13 +70,12 @@ class ReportController extends Controller
                         ]);
                     })->filter(fn ($r) => $r['total_column'] > 0)
                         ->values(),
-                    'total_column' => $timetables->map(function ($r) use ($q, $start_date, $end_date) {
+                    'total_column' => $timetables->map(function ($r) use ($q, $date_period) {
                         return collect([
                             'title' => $r->title,
                             'color' => $r->color,
                             'schedules' => $q->schedules
-                                ->where('date', '>=', $start_date)
-                                ->where('date', '<=', $end_date)
+                                ->whereIn('date', $date_period)
                                 ->where('timetable_id', $r->id)
                                 ->map(function ($s, $key) use ($q) {
                                     return collect([
@@ -83,8 +85,7 @@ class ReportController extends Controller
                                 })
                                 ->groupBy('date'),
                             'total_column' => $q->schedules
-                                ->where('date', '>=', $start_date)
-                                ->where('date', '<=', $end_date)
+                                ->whereIn('date', $date_period)
                                 ->where('timetable_id', $r->id)
                                 ->groupBy('date')
                                 ->max(function ($s) {
@@ -123,101 +124,14 @@ class ReportController extends Controller
 
         return $pdf->setPaper('A4', 'landscape')
             ->download($filename);
-    }
 
-    public function scheduling_check_view(Request $request)
-    {
-        $request->validate(
-            [
-                'start_date' => 'required|date|date_format:"Y-m-d"',
-                'end_date' => 'required|date|date_format:"Y-m-d"|after:start_date|beforeOrEqual:' . Carbon::parse($request->start_date)->addDays(6),
-            ],
-            [],
-            [
-                'start_date' => __('Start Date'),
-                'end_date' => __('End Date'),
-            ]
-        );
-
-        $start_date = $request->start_date;
-        $end_date = $request->end_date;
-        $period = CarbonPeriod::since($start_date)->until($end_date);
-        $timetables = Timetable::get();
-
-        $data = Area::get()
-            ->map(function ($q) use ($start_date, $end_date, $timetables) {
-                return ([
-                    'name' => $q->name,
-                    'timetable' => $timetables->map(function ($r) use ($q, $start_date, $end_date) {
-                        return collect([
-                            'title' => $r->title,
-                            'color' => $r->color,
-                            'schedules' => $q->schedules
-                                ->where('date', '>=', $start_date)
-                                ->where('date', '<=', $end_date)
-                                ->where('timetable_id', $r->id)
-                                ->map(function ($s, $key) use ($q) {
-                                    return collect([
-                                        'date' => $s->date,
-                                        'officer' => $s->officer->name,
-                                    ]);
-                                })
-                                ->groupBy('date'),
-                            'total_column' => $q->schedules
-                                ->where('date', '>=', $start_date)
-                                ->where('date', '<=', $end_date)
-                                ->where('timetable_id', $r->id)
-                                ->groupBy('date')
-                                ->max(function ($s) {
-                                    return $s->count();
-                                })
-                        ]);
-                    })->filter(fn ($r) => $r['total_column'] > 0)
-                        ->values(),
-                    'total_column' => $timetables->map(function ($r) use ($q, $start_date, $end_date) {
-                        return collect([
-                            'title' => $r->title,
-                            'color' => $r->color,
-                            'schedules' => $q->schedules
-                                ->where('date', '>=', $start_date)
-                                ->where('date', '<=', $end_date)
-                                ->where('timetable_id', $r->id)
-                                ->map(function ($s, $key) use ($q) {
-                                    return collect([
-                                        'date' => $s->date,
-                                        'officer' => $s->officer->name,
-                                    ]);
-                                })
-                                ->groupBy('date'),
-                            'total_column' => $q->schedules
-                                ->where('date', '>=', $start_date)
-                                ->where('date', '<=', $end_date)
-                                ->where('timetable_id', $r->id)
-                                ->groupBy('date')
-                                ->max(function ($s) {
-                                    return $s->count();
-                                })
-                        ]);
-                    })->filter(fn ($r) => $r['total_column'] > 0)
-                        ->values()
-                        ->sum('total_column')
-                ]);
-            });
-
-        // DATA ORDER LIST
-        // 1. AREA
-        // 2. TIMETABLE
-        // 3. SCHEDULE
-        // 4. OFFICER
-
-        // ddd($data);
-        return view('printout.scheduling', [
-            'start_date' => $start_date,
-            'end_date' => $end_date,
-            'period' => $period,
-            'data' => $data,
-            'timetables' => $timetables
-        ]);
+        // return view('printout.scheduling', [
+        //     'start_date' => $start_date,
+        //     'end_date' => $end_date,
+        //     'period' => $period,
+        //     'data' => $data,
+        //     'timetables' => $timetables
+        // ]);
     }
 
     public function attendance()

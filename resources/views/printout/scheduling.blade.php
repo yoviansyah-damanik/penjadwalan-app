@@ -133,21 +133,22 @@
                         {{-- INFORMATION --}}
                     </td>
                 </tr>
-                @if ($area['total_column'] > 1)
+                @if ($area['total_column'] > 0)
                     @foreach (range(0, $area['total_column'] - 1) as $range)
-                        @if (isset($area['timetable'][$range]))
-                            @foreach (range($range == 0 ? 1 : 0, $area['timetable'][$range]['total_column'] - 1) as $range_)
-                                <tr>
-                                    @foreach ($period as $date)
-                                        <td
-                                            style="background-color:{{ $area['timetable'][$range]['color'] ?? '#fff' }}">
-                                            {{ $area['timetable'][$range]['schedules'][$date->format('Y-m-d')][$range_]['officer'] ?? '' }}
+                        @if ($area['timetable'][$range])
+                            @foreach (range(0, $area['timetable'][$range]['total_column'] - 1) as $range_)
+                                @if ($range > 0)
+                                    <tr>
+                                        @foreach ($period as $date)
+                                            <td
+                                                style="background-color:{{ $area['timetable'][$range]['color'] ?? '#fff' }}">
+                                                {{ $area['timetable'][$range]['schedules'][$date->format('Y-m-d')][$range_]['officer'] ?? '' }}
+                                            </td>
+                                        @endforeach
+                                        <td>
                                         </td>
-                                    @endforeach
-                                    <td>
-                                        {{-- INFORMATION --}}
-                                    </td>
-                                </tr>
+                                    </tr>
+                                @endif
                             @endforeach
                         @endif
                     @endforeach
