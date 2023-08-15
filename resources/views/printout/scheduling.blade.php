@@ -137,7 +137,7 @@
                     @foreach (range(0, $area['total_column'] - 1) as $range)
                         @if (isset($area['timetable'][$range]))
                             @foreach (range(0, $area['timetable'][$range]['total_column'] - 1) as $range_)
-                                @if ($range > 0)
+                                @if (($range == 0 && $range_ > 0) || ($range > 0 && $range_ >= 0))
                                     <tr>
                                         @foreach ($period as $date)
                                             <td
