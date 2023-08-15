@@ -37,10 +37,17 @@
                                 <td class="text-center">{{ $loop->iteration }}</td>
                                 <td>{{ $officer->name }}</td>
                                 @if ($officer->status == 'Active')
-                                    @if ($officer->schedules()->date($attendance->date)->first())
+                                    @if (
+                                        $officer
+                                            ?->schedules()->date($attendance->date)->first())
                                         @foreach (\App\Models\AttendanceRecord::STATUS as $status)
                                             <th class="text-center">
-                                                @if ($officer->schedules()->date($attendance->date)->first()->attendance_record->attendance_status == $status['code'])
+                                                @if (
+                                                    $officer
+                                                        ?->schedules()->date($attendance->date)->first()?->attendance_record?->attendance_status != null &&
+                                                        $officer
+                                                            ?->schedules()->date($attendance->date)->first()?->attendance_record?->attendance_status == $status['code']
+                                                )
                                                     <i class="bi bi-check"></i>
                                                 @else
                                                     <i class="bi bi-dash"></i>

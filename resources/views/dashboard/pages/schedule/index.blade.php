@@ -5,6 +5,31 @@
 @section('content')
     <div class="card">
         <div class="card-body">
+            <div class="text-center">
+                <div class="btn-group mb-0" role="group" aria-label="Basic example">
+                    <a type="button" href="{{ route('schedule', ['type' => 'all']) }}"
+                        class="btn @if ($type == 'all' || !$type) btn-primary @else btn-outline-primary @endif">
+                        {{ __('All') }}
+                    </a>
+                    <a type="button" href="{{ route('schedule', ['type' => 'today']) }}"
+                        class="btn @if ($type == 'today') btn-primary @else btn-outline-primary @endif">
+                        {{ __('Today') }}
+                    </a>
+                    <a type="button" href="{{ route('schedule', ['type' => 'this_week']) }}"
+                        class="btn @if ($type == 'this_week') btn-primary @else btn-outline-primary @endif">
+                        {{ __('This Week') }}
+                    </a>
+                    <a type="button" href="{{ route('schedule', ['type' => 'next_7_days']) }}"
+                        class="btn @if ($type == 'next_7_days') btn-primary @else btn-outline-primary @endif">
+                        {{ __('Next 7 Days') }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
             <div class="table-responsive">
                 <table class="table">
                     <thead class="text-center">

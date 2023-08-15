@@ -22124,6 +22124,8 @@ body .bi:before {
 }
 
 .stats-icon i {
+    height: auto !important;
+    width: auto !important;
     color: #fff;
     font-size: 1.7rem
 }
@@ -22341,11 +22343,6 @@ a {
 
 .z-1 {
     z-index: 1
-}
-
-.dashboard-page .bi {
-    height: auto !important;
-    width: auto !important;
 }
 
 .dashboard-page .card-body {

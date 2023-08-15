@@ -40,6 +40,8 @@ class HomeController extends Controller
 
         $schedule_today = Schedule::date(date('Y-m-d'));
 
+        $filled_attendance = Attendance::where('date', date('Y-m-d'))->count() > 0 ? true : false;
+
         $attendance_present_today = $schedule_today->clone()->whereHas('attendance_record', function ($q) {
             $q->present();
         })->count() ?? 0;
@@ -69,7 +71,8 @@ class HomeController extends Controller
             'attendance_not_present_today',
             'attendance_permit_today',
             'attendance_leave_today',
-            'schedule_today'
+            'schedule_today',
+            'filled_attendance'
         ));
     }
 

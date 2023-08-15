@@ -111,10 +111,10 @@ Route::middleware('auth')
                         Route::get('attendance', [AttendanceController::class, 'index']);
                         Route::get('attendance/create', [AttendanceController::class, 'create'])->name('.create');
                         Route::post('attendance/create', [AttendanceController::class, 'store'])->name('.store');
-                        Route::get('attendance/edit/{attendance:id}', [AttendanceController::class, 'edit'])->name('.edit');
-                        Route::put('attendance/edit/{attendance:id}', [AttendanceController::class, 'update'])->name('.update');
-                        Route::delete('attendance/destroy/{attendance:id}', [AttendanceController::class, 'destroy'])->name('.destroy');
-                        Route::get('attendance/show/{attendance:id}', [AttendanceController::class, 'show'])->name('.show');
+                        Route::get('attendance/edit/{attendance:date}', [AttendanceController::class, 'edit'])->name('.edit');
+                        Route::put('attendance/edit/{attendance:date}', [AttendanceController::class, 'update'])->name('.update');
+                        Route::delete('attendance/destroy/{attendance:date}', [AttendanceController::class, 'destroy'])->name('.destroy');
+                        Route::get('attendance/show/{attendance:date}', [AttendanceController::class, 'show'])->name('.show');
                     });
 
                 // User

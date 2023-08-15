@@ -9,7 +9,7 @@
                 <div class="row">
                     <div class="col-6 col-lg-4">
                         <div class="card">
-                            <div class="card-body px-4 py-4-5">
+                            <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-4 d-flex justify-content-start ">
                                         <div class="stats-icon purple mb-2">
@@ -21,12 +21,13 @@
                                         <h6>{{ $officer }}</h6>
                                     </div>
                                 </div>
+                                <a href="{{ route('officer') }}" class="stretched-link"></a>
                             </div>
                         </div>
                     </div>
                     <div class="col-6 col-lg-4">
                         <div class="card">
-                            <div class="card-body px-4 py-4-5">
+                            <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-4 d-flex justify-content-start ">
                                         <div class="stats-icon blue mb-2">
@@ -38,12 +39,13 @@
                                         <h6>{{ $area }}</h6>
                                     </div>
                                 </div>
+                                <a href="{{ route('area') }}" class="stretched-link"></a>
                             </div>
                         </div>
                     </div>
                     <div class="col-6 col-lg-4">
                         <div class="card">
-                            <div class="card-body px-4 py-4-5">
+                            <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-4 d-flex justify-content-start ">
                                         <div class="stats-icon green mb-2">
@@ -55,12 +57,13 @@
                                         <h6>{{ $timetable }}</h6>
                                     </div>
                                 </div>
+                                <a href="{{ route('timetable') }}" class="stretched-link"></a>
                             </div>
                         </div>
                     </div>
                     <div class="col-6 col-lg-4">
                         <div class="card">
-                            <div class="card-body px-4 py-4-5">
+                            <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-4 d-flex justify-content-start ">
                                         <div class="stats-icon red mb-2">
@@ -72,12 +75,13 @@
                                         <h6>{{ $schedule }}</h6>
                                     </div>
                                 </div>
+                                <a href="{{ route('schedule') }}" class="stretched-link"></a>
                             </div>
                         </div>
                     </div>
                     <div class="col-6 col-lg-4">
                         <div class="card">
-                            <div class="card-body px-4 py-4-5">
+                            <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-4 d-flex justify-content-start ">
                                         <div class="stats-icon green mb-2">
@@ -89,12 +93,13 @@
                                         <h6>{{ $attendance_present }}</h6>
                                     </div>
                                 </div>
+                                <a href="{{ route('attendance') }}" class="stretched-link"></a>
                             </div>
                         </div>
                     </div>
                     <div class="col-6 col-lg-4">
                         <div class="card">
-                            <div class="card-body px-4 py-4-5">
+                            <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-4 d-flex justify-content-start ">
                                         <div class="stats-icon red mb-2">
@@ -106,12 +111,13 @@
                                         <h6>{{ $attendance_not_present }}</h6>
                                     </div>
                                 </div>
+                                <a href="{{ route('attendance') }}" class="stretched-link"></a>
                             </div>
                         </div>
                     </div>
                     <div class="col-6 col-lg-4">
                         <div class="card">
-                            <div class="card-body px-4 py-4-5">
+                            <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-4 d-flex justify-content-start ">
                                         <div class="stats-icon purple mb-2">
@@ -123,12 +129,13 @@
                                         <h6>{{ $attendance_permit }}</h6>
                                     </div>
                                 </div>
+                                <a href="{{ route('attendance') }}" class="stretched-link"></a>
                             </div>
                         </div>
                     </div>
                     <div class="col-6 col-lg-4">
                         <div class="card">
-                            <div class="card-body px-4 py-4-5">
+                            <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-4 d-flex justify-content-start ">
                                         <div class="stats-icon blue mb-2">
@@ -140,6 +147,7 @@
                                         <h6>{{ $attendance_leave }}</h6>
                                     </div>
                                 </div>
+                                <a href="{{ route('attendance') }}" class="stretched-link"></a>
                             </div>
                         </div>
                     </div>
@@ -218,10 +226,11 @@
                                 <h6 class="small text-muted fst-italic mb-0">{{ Auth::user()->email }}</h6>
                             </div>
                         </div>
+                        <a href="{{ route('account') }}" class="stretched-link"></a>
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card-body px-4 py-4-5">
+                    <div class="card-body">
                         <div class="row">
                             <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-4 d-flex justify-content-start ">
                                 <div class="stats-icon red mb-2">
@@ -233,68 +242,92 @@
                                 <h6>{{ $schedule_today }}</h6>
                             </div>
                         </div>
+                        <a href="{{ route('schedule', ['type' => 'today']) }}" class="stretched-link"></a>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card-body px-4 py-4-5">
-                        <div class="row">
-                            <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-4 d-flex justify-content-start ">
-                                <div class="stats-icon green mb-2">
-                                    <i class="bi bi-calendar2-check"></i>
+                @if ($filled_attendance)
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-4 d-flex justify-content-start ">
+                                    <div class="stats-icon green mb-2">
+                                        <i class="bi bi-calendar2-check"></i>
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-8">
+                                    <h5>{{ __(':t Today', ['t' => __('Present')]) }}</h5>
+                                    <h6>{{ $attendance_present_today }}</h6>
                                 </div>
                             </div>
-                            <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-8">
-                                <h5>{{ __(':t Today', ['t' => __('Present')]) }}</h5>
-                                <h6>{{ $attendance_present_today }}</h6>
-                            </div>
+                            <a href="{{ route('attendance.show', date('Y-m-d')) }}" class="stretched-link"></a>
                         </div>
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card-body px-4 py-4-5">
-                        <div class="row">
-                            <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-4 d-flex justify-content-start ">
-                                <div class="stats-icon red mb-2">
-                                    <i class="bi bi-calendar2-check"></i>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-4 d-flex justify-content-start ">
+                                    <div class="stats-icon red mb-2">
+                                        <i class="bi bi-calendar2-check"></i>
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-8">
+                                    <h5>{{ __(':t Today', ['t' => __('Not Present')]) }}</h5>
+                                    <h6>{{ $attendance_not_present_today }}</h6>
                                 </div>
                             </div>
-                            <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-8">
-                                <h5>{{ __(':t Today', ['t' => __('Not Present')]) }}</h5>
-                                <h6>{{ $attendance_not_present_today }}</h6>
-                            </div>
+                            <a href="{{ route('attendance.show', date('Y-m-d')) }}" class="stretched-link"></a>
                         </div>
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card-body px-4 py-4-5">
-                        <div class="row">
-                            <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-4 d-flex justify-content-start ">
-                                <div class="stats-icon purple mb-2">
-                                    <i class="bi bi-calendar2-check"></i>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-4 d-flex justify-content-start ">
+                                    <div class="stats-icon purple mb-2">
+                                        <i class="bi bi-calendar2-check"></i>
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-8">
+                                    <h5>{{ __(':t Today', ['t' => __('Permit')]) }}</h5>
+                                    <h6>{{ $attendance_permit_today }}</h6>
                                 </div>
                             </div>
-                            <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-8">
-                                <h5>{{ __(':t Today', ['t' => __('Permit')]) }}</h5>
-                                <h6>{{ $attendance_permit_today }}</h6>
-                            </div>
+                            <a href="{{ route('attendance.show', date('Y-m-d')) }}" class="stretched-link"></a>
                         </div>
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card-body px-4 py-4-5">
-                        <div class="row">
-                            <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-4 d-flex justify-content-start ">
-                                <div class="stats-icon blue mb-2">
-                                    <i class="bi bi-calendar2-check"></i>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-4 d-flex justify-content-start ">
+                                    <div class="stats-icon blue mb-2">
+                                        <i class="bi bi-calendar2-check"></i>
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-8">
+                                    <h5>{{ __(':t Today', ['t' => __('Leave')]) }}</h5>
+                                    <h6>{{ $attendance_leave_today }}</h6>
                                 </div>
                             </div>
-                            <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-8">
-                                <h5>{{ __(':t Today', ['t' => __('Leave')]) }}</h5>
-                                <h6>{{ $attendance_leave_today }}</h6>
-                            </div>
+                            <a href="{{ route('attendance.show', date('Y-m-d')) }}" class="stretched-link"></a>
                         </div>
                     </div>
-                </div>
+                @else
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-4 d-flex justify-content-start ">
+                                    <div class="stats-icon blue mb-2">
+                                        <i class="bi bi-calendar2-check"></i>
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-8">
+                                    <h5>{{ __('Attendance Today') }}</h5>
+                                    <h6>{{ __('You have not filled in today\'s attendance') }}</h6>
+                                </div>
+                            </div>
+                            <a href="{{ route('attendance.create') }}" class="stretched-link"></a>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

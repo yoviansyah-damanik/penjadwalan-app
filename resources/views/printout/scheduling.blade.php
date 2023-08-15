@@ -135,7 +135,7 @@
                 </tr>
                 @if ($area['total_column'] > 0)
                     @foreach (range(0, $area['total_column'] - 1) as $range)
-                        @if ($area['timetable'][$range])
+                        @if (isset($area['timetable'][$range]))
                             @foreach (range(0, $area['timetable'][$range]['total_column'] - 1) as $range_)
                                 @if ($range > 0)
                                     <tr>

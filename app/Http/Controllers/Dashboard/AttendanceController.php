@@ -16,11 +16,44 @@ use App\Models\AttendanceRecord;
 
 class AttendanceController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $attendances = Attendance::paginate(15);
+        $type = $request->type;
 
-        return view('dashboard.pages.attendance.index', compact('attendances'));
+        $attendances = new Attendance();
+        if ($type == 'last_7_days')
+            $attendances = $attendances->where('date', '<=', date('Y-m-d'))
+                ->where('date', '>=', Carbon::now()->addDays(-7)->format('Y-m-d'));
+        elseif ($type == 'last_14_days')
+            $attendances = $attendances->where('date', '<=', date('Y-m-d'))
+                ->where('date', '>=', Carbon::now()->addDays(-14)->format('Y-m-d'));
+        elseif ($type == 'this_month')
+            $attendances = $attendances->where('date', '>=', Carbon::now()->firstOfMonth()->format('Y-m-d'))
+                ->where('date', '<=', Carbon::now()->endOfMonth()->format('Y-m-d'));
+
+        $attendance_present_total = $attendances->clone()->get()->sum(function ($q) {
+            return $q->records()->present()->count();
+        });
+        $attendance_not_present_total = $attendances->clone()->get()->sum(function ($q) {
+            return $q->records()->notPresent()->count();
+        });
+        $attendance_permit_total = $attendances->clone()->get()->sum(function ($q) {
+            return $q->records()->permit()->count();
+        });
+        $attendance_leave_total = $attendances->clone()->get()->sum(function ($q) {
+            return $q->records()->leave()->count();
+        });
+
+        $attendances = $attendances->paginate(15);
+
+        return view('dashboard.pages.attendance.index', compact(
+            'attendances',
+            'type',
+            'attendance_present_total',
+            'attendance_not_present_total',
+            'attendance_permit_total',
+            'attendance_leave_total'
+        ));
     }
 
     public function show(Attendance $attendance)

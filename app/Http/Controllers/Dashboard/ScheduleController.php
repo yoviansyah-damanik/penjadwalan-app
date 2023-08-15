@@ -11,18 +11,30 @@ use App\Models\Schedule;
 use App\Models\Timetable;
 use App\Models\Attendance;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Models\AttendanceRecord;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\ScheduleRequest;
-use App\Models\AttendanceRecord;
 
 class ScheduleController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $schedules = Schedule::paginate(15);
+        $type = $request->type;
 
-        return view('dashboard.pages.schedule.index', compact('schedules'));
+        $schedules = new Schedule();
+        if ($type == 'today')
+            $schedules = $schedules->date(date('Y-m-d'));
+        elseif ($type == 'next_7_days')
+            $schedules = $schedules->where('date', '>=', date('Y-m-d'))
+                ->where('date', '<=', Carbon::now()->addDays(7)->format('Y-m-d'));
+        elseif ($type == 'this_week')
+            $schedules = $schedules->where('date', '>=', Carbon::now()->startOfWeek()->addDays(-1)->format('Y-m-d'))
+                ->where('date', '<=', Carbon::now()->startOfWeek()->addDays(6)->format('Y-m-d'));
+
+        $schedules = $schedules->paginate(15);
+        return view('dashboard.pages.schedule.index', compact('schedules', 'type'));
     }
 
     public function show(Schedule $schedule)
