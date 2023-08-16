@@ -110,7 +110,7 @@ class ScheduleController extends Controller
             }
 
             DB::commit();
-            return to_route('schedule')
+            return to_route('schedule.show', $new_schedule->id)
                 ->with('store_success', true)
                 ->with('alert_feature', __('Schedule'));
         } catch (Exception $e) {
