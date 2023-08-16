@@ -38,7 +38,7 @@ class TimetableController extends Controller
         $new_timetable->description = $request->description;
         $new_timetable->save();
 
-        return to_route('timetable')
+        return to_route('timetable.show', $new_timetable->slug)
             ->with('store_success', true)
             ->with('alert_feature', __('Timetable'));
     }
@@ -58,7 +58,7 @@ class TimetableController extends Controller
         $timetable->description = $request->description;
         $timetable->save();
 
-        return to_route('timetable')
+        return to_route('timetable.show', $timetable->slug)
             ->with('store_success', true)
             ->with('alert_feature', __('Timetable'));
     }

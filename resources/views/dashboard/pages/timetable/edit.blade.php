@@ -24,7 +24,7 @@
                         <div class="form-group">
                             <label for="start">{{ __('Start') }}</label>
                             <input type="time" name="start" class="form-control"
-                                value="{{ old('start', $timetable->start) }}">
+                                value="{{ old('start', Carbon::parse($timetable->start)->format('H:i')) }}">
                             @error('start')
                                 <div class="text-danger small mt-1">
                                     {{ $message }}
@@ -34,7 +34,7 @@
                         <div class="form-group">
                             <label for="end">{{ __('End') }}</label>
                             <input type="time" name="end" class="form-control"
-                                value="{{ old('end', $timetable->end) }}">
+                                value="{{ old('end', Carbon::parse($timetable->end)->format('H:i')) }}">
                             @error('end')
                                 <div class="text-danger small mt-1">
                                     {{ $message }}

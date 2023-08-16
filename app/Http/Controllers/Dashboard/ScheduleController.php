@@ -148,7 +148,9 @@ class ScheduleController extends Controller
         $check = Schedule::where([
             'officer_id' => $officer,
             'date' => $date
-        ])->first();
+        ])
+            ->where('date', '!=', $schedule->date)
+            ->first();
 
         if ($check) {
             return back()
@@ -164,7 +166,7 @@ class ScheduleController extends Controller
         $schedule->description = $request->description;
         $schedule->save();
 
-        return to_route('schedule')
+        return to_route('schedule.show', $schedule->id)
             ->with('store_success', true)
             ->with('alert_feature', __('Schedule'));
     }
